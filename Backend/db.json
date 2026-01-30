@@ -4,13 +4,17 @@
       "id": "1",
       "name": "Juan",
       "email": "juan@gmail.com",
-      "pass": "123456"
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable":false
     },
     {
       "id": "2",
       "name": "Diego",
       "email": "diego@gmail.com",
-      "pass": "123456"
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable": false
     }
   ],
   "company": [
@@ -18,13 +22,25 @@
       "id": "1",
       "name": "Riwi",
       "email": "riwi@riwi.io",
-      "pass": "123456"
+      "password": "123456"
     },
     {
       "id": "2",
       "name": "Rappi",
       "email": "rappi@rappi.io",
-      "pass": "123456"
+      "password": "123456"
     }
+  ],
+  "jobOffer":[
+    {
+      "id":"1",
+      "company_id":"1",
+      "candidates": [
+        "1", "2"
+      ],
+      "details": "Need developers for CRUDZASO",
+      "state": "on-going"
+    }
+    
   ]
 }
