@@ -1,0 +1,30 @@
+{
+  "candidates": [
+    {
+      "id": "1",
+      "name": "Juan",
+      "email": "juan@gmail.com",
+      "pass": "123456"
+    },
+    {
+      "id": "2",
+      "name": "Diego",
+      "email": "diego@gmail.com",
+      "pass": "123456"
+    }
+  ],
+  "company": [
+    {
+      "id": "1",
+      "name": "Riwi",
+      "email": "riwi@riwi.io",
+      "pass": "123456"
+    },
+    {
+      "id": "2",
+      "name": "Rappi",
+      "email": "rappi@rappi.io",
+      "pass": "123456"
+    }
+  ]
+}
