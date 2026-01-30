@@ -1,4 +1,4 @@
-import {updateUser} from "./../api.js"
+import {updateCandidate} from "./../api.js"
 export default class Candidate{
     constructor(id, name, email, password, isOpen, isAvaiable){
         this.id = id;
@@ -12,9 +12,9 @@ export default class Candidate{
         //Verifications for candidate object 
         return new Candidate(id, name, email, password, isOpen, isAvaiable)
     }
-    openToWork(){
+    async openToWork(){
         this.openToWork = true;
-        updateUser({id: this.id, isOpen:true})
+        return await updateCandidate({id: this.id, isOpen:true})
     }
     closeToWork(){
         this.openToWork = false;
