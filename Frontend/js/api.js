@@ -1,4 +1,5 @@
 const API_URL = "http://localhost:3000";
+export default API_URL; // Basic URL for the API
 /* API CANDIDATES METHODS */
 export const getCandidates = async ()=>{
     return await fetch(API_URL+"/candidates")
