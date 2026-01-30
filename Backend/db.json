@@ -1,0 +1,62 @@
+{
+  "candidates": [
+    {
+      "id": "1",
+      "name": "Juan",
+      "email": "juan@gmail.com",
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable":false
+    },
+    {
+      "id": "2",
+      "name": "Diego",
+      "email": "diego@gmail.com",
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable": false
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "Riwi",
+      "email": "riwi@riwi.io",
+      "password": "123456",
+      "jobOffers": [
+        "1"
+      ],
+      "matches":[
+        "1"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Rappi",
+      "email": "rappi@rappi.io",
+      "password": "123456",
+      "jobOffers": [],
+      "matches": []
+    }
+  ],
+  "jobOffers":[
+    {
+      "id":"1",
+      "company_id":"1",
+      "candidates": [
+        "1", "2"
+      ],
+      "details": "Need developers for CRUDZASO",
+      "state": "on-going"
+    }
+    
+  ],
+  "matches":[
+    {
+      "id":"1",
+      "candidate":"1",
+      "company":"1",
+      "state":"hired"
+    }
+  ]
+}
