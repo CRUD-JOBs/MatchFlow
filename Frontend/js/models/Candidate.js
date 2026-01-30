@@ -8,6 +8,10 @@ export default class Candidate{
         this.isAvaiable = isAvaiable;
         this.isOpen = isOpen;
     }
+    static createCandidate({id, name, email, password, isOpen, isAvaiable}){
+        //Verifications for candidate object 
+        return new Candidate(id, name, email, password, isOpen, isAvaiable)
+    }
     openToWork(){
         this.openToWork = true;
         updateUser({id: this.id, isOpen:true})
