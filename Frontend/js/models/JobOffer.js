@@ -1,8 +1,8 @@
 import {updateOffer} from "./../api.js";
 export default class JobOffer{
-    constructor(id, company_id, candidates, details, state){
+    constructor(id, company, candidates, details, state){
         this.id = id;
-        this.company_id = company_id;
+        this.company = company;
         this.candidates =  candidates;
         this.details = details;
         this.state = state;
