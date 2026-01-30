@@ -22,13 +22,21 @@
       "id": "1",
       "name": "Riwi",
       "email": "riwi@riwi.io",
-      "password": "123456"
+      "password": "123456",
+      "jobOffers": [
+        "1"
+      ],
+      "matches":[
+        "1"
+      ]
     },
     {
       "id": "2",
       "name": "Rappi",
       "email": "rappi@rappi.io",
-      "password": "123456"
+      "password": "123456",
+      "jobOffers": [],
+      "matches": []
     }
   ],
   "jobOffer":[
@@ -42,5 +50,13 @@
       "state": "on-going"
     }
     
+  ],
+  "matches":[
+    {
+      "id":"1",
+      "candidate":"1",
+      "company":"1",
+      "state":"hired"
+    }
   ]
 }
