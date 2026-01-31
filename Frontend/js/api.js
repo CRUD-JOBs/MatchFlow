@@ -377,6 +377,7 @@ export const saveSession = (user) => {
         id: user.id,
         name: user.name,
         email: user.email,
+        password : user.password,
         role: user.role || (user.jobOffers !== undefined ? 'company' : 'candidate')
     }));
 };

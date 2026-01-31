@@ -1,6 +1,7 @@
 import Candidate from "../models/Candidate.js"
 const renderCandidate = async ()=>{
-    const candidate = Candidate.createCandidate(JSON.parse(sessionStorage.getItem("userData")))
+    const candidate = Candidate.createCandidate(JSON.parse(sessionStorage.getItem("currentUser")))
+    console.log(candidate)
     if(candidate===null)return
     document.querySelector("[data-user-name]").textContent = candidate.name;
     document.querySelector("[data-user-active]").textContent = candidate.isAvaiable ? "Activo" : "Inactivo";
@@ -10,12 +11,12 @@ const renderCandidate = async ()=>{
     btn.addEventListener("click", ()=>{
         if(btn.textContent === "Desactivar"){
             candidate?.closeToWork()
-            sessionStorage.setItem("userData", JSON.stringify(candidate))
+            sessionStorage.setItem("currentUser", JSON.stringify(candidate))
             btn.textContent = "Activar";
         } else{
             candidate?.openToWork()
             btn.textContent = "Desactivar"
-            sessionStorage.setItem("userData", JSON.stringify(candidate))
+            sessionStorage.setItem("currentUser", JSON.stringify(candidate))
         }
     })
 }

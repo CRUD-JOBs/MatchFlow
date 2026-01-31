@@ -13,7 +13,7 @@
       "name": "Diego",
       "email": "diego@gmail.com",
       "password": "123456",
-      "isOpen": false,
+      "isOpen": true,
       "isAvaiable": false
     },
     {
