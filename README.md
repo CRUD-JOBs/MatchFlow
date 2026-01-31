@@ -357,7 +357,7 @@ Este proyecto está bajo la Licencia MIT.
 ## Equipo de Desarrollo
 
 - **Desarrolladores** - Equipo CrudJobs
-- **Scrum Master** - [Santiago-Sanches-Ruiz]
+- **Scrum Master** - [Santiago-Sanchez-Ruiz]
 - **Product Owner** - [Juliana-Sofia-Valencia]
 
 ---
