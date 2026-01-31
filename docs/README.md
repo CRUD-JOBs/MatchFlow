@@ -106,11 +106,11 @@ A continuación las historias de usuario y criterios de aceptación para el proy
         - [ ] Los intentos de contactar fuera de este estado están bloqueados.
         - [ ] El estado Contacted se puede actualizar desde la interfaz y se guarda en json-server.
 
-- [ ] User story 7
+- [x] User story 7
     - Como **desarrollador**, quiero que **json-server y caching estén implementados**, para simular un backend funcional y rápido.
-        - [ ] Todos los datos se obtienen y actualizan a través de json-server.
-        - [ ] Los endpoints usan cache local para mejorar la performance.
-        - [ ] Se documenta claramente cómo iniciar y usar json-server en el proyecto.
+        - [x] Todos los datos se obtienen y actualizan a través de json-server.
+        - [x] Los endpoints usan cache local para mejorar la performance.
+        - [x] Se documenta claramente cómo iniciar y usar json-server en el proyecto.
 
 - [ ] User story 8
     - Como **equipo de desarrollo**, queremos que el proyecto esté **versionado y documentado**, para mantener claridad y control sobre el código.
