@@ -72,7 +72,7 @@ A continuación las historias de usuario y criterios de aceptación para el proy
 
 - [ ] User story 1
     - Como **candidato**, quiero poder activar mi estado **Open to Work**, para que las empresas me vean como disponible.
-        - [ ] El candidato puede activar/desactivar el estado Open to Work.
+        - [x] El candidato puede activar/desactivar el estado Open to Work.
         - [ ] Al activar Open to Work, el candidato aparece en la lista de candidatos visibles para las empresas.
         - [ ] Al desactivar Open to Work, el candidato deja de ser visible para las empresas.
 

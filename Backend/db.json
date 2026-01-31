@@ -5,7 +5,7 @@
       "name": "Juan",
       "email": "juan@gmail.com",
       "password": "123456",
-      "isOpen": false,
+      "isOpen": true,
       "isAvaiable": false
     },
     {

@@ -13,12 +13,12 @@ export default class Candidate{
         return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false)
     }
     async openToWork(){
-        this.openToWork = true;
+        this.isOpen = true;
         return await updateCandidate(this.id, {isOpen:true})
     }
-    closeToWork(){
-        this.openToWork = false;
-        updateUser({id: this.id, isOpen:false})
+    async closeToWork(){
+        this.isOpen = false;
+        return await updateCandidate(this.id, {isOpen:false})
     }
     getHired(){
         //code

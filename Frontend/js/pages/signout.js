@@ -63,9 +63,7 @@ function loadUserInfo() {
             const roleText = session.role === 'candidate' ? 'Candidato' : 'Empresa';
             element.textContent = roleText;
         });
-
-        console.log('Usuario actual:', session);
-    }
+        }
 }
 
 // Mostrar mensaje de logout
