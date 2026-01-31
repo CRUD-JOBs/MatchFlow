@@ -8,13 +8,13 @@ export default class Candidate{
         this.isAvaiable = isAvaiable;
         this.isOpen = isOpen;
     }
-    static createCandidate({id, name, email, password, isOpen, isAvaiable}){
+    static createCandidate({id = null, name = null, email = null, password = null, isOpen = null, isAvaiable = null}){
         if(!id || !name || !email || !password)return null
         return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false)
     }
     async openToWork(){
         this.openToWork = true;
-        return await updateCandidate({id: this.id, isOpen:true})
+        return await updateCandidate(this.id, {isOpen:true})
     }
     closeToWork(){
         this.openToWork = false;

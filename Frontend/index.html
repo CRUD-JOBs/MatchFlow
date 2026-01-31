@@ -20,9 +20,9 @@
              class="rounded-circle mb-3"
              alt="Foto trabajador">
 
-        <h4>Juan Pérez</h4>
-        <p class="mb-1">Desarrollador Web</p>
-        <span class="badge bg-light text-primary">Activo</span>
+        <h4 id="candidate-name">Juan Pérez</h4>
+        <p id="candidate-job" class="mb-1">Desarrollador Web</p>
+        <span id="candidate-isAvaiable"class="badge bg-light text-primary">Disponible</span>
       </div>
 
       <!-- Información -->
@@ -31,19 +31,19 @@
         <div class="row">
           <div class="col-md-6 mb-2">
             <strong>Email:</strong>
-            <p>juanperez@email.com</p>
+            <p id="candidate-email">juanperez@email.com</p>
           </div>
           <div class="col-md-6 mb-2">
             <strong>Teléfono:</strong>
-            <p>+57 300 123 4567</p>
+            <p id="candidate-number">+57 300 123 4567</p>
           </div>
           <div class="col-md-6 mb-2">
             <strong>Ciudad:</strong>
-            <p>Bogotá, Colombia</p>
+            <p id="candidate-city">Bogotá, Colombia</p>
           </div>
           <div class="col-md-6 mb-2">
             <strong>Fecha de ingreso:</strong>
-            <p>15/03/2023</p>
+            <p id="candidate-date">15/03/2023</p>
           </div>
         </div>
 
@@ -51,18 +51,18 @@
 
         <h5 class="mb-3">Datos Laborales</h5>
         <ul class="list-group mb-3">
-          <li class="list-group-item">
+          <li id="candidate-area"class="list-group-item">
             <strong>Área:</strong> Tecnología
           </li>
-          <li class="list-group-item">
+          <li id="candidate-contract" class="list-group-item">
             <strong>Tipo de contrato:</strong> Tiempo completo
           </li>
-          <li class="list-group-item">
+          <li id="candidate-salary" class="list-group-item">
             <strong>Salario:</strong> $3.500.000 COP
           </li>
         </ul>
 
-        <h5 class="mb-3">Habilidades</h5>
+        <h5 data-candidate="abilities" class="mb-3">Habilidades</h5>
         <span class="badge bg-secondary me-1">HTML</span>
         <span class="badge bg-secondary me-1">CSS</span>
         <span class="badge bg-secondary me-1">JavaScript</span>
@@ -70,13 +70,13 @@
 
         <div class="mt-4">
           <button class="btn btn-primary me-2">Editar perfil</button>
-          <button class="btn btn-outline-danger">Desactivar</button>
+          <button id="candidate-openToWork" class="btn btn-outline-danger">Desactivar</button>
         </div>
       </div>
 
     </div>
   </div>
 </div>
-
+<script src="./js/pages/index.js" type="module"></script>
 </body>
 </html>
