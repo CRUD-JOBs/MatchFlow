@@ -90,159 +90,128 @@
                                     <td> Tecnología </td>
                                     <td> <span class="badge bg-success"> Activa </span> </td>
                                     <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary"
-                                            onclick="verAspirantes('Desarrollador IA')">
-                                            <i class="bi bi-eye me-1"></i> Ver aspirantes
-                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="verAspirantes('Desarrollador IA')"> <i class="bi bi-eye me-1"> </i> Ver aspirantes </button>
                                     </td>
                                 </tr>
-
                                 <tr>
-                                    <td>2</td>
-                                    <td>Juan</td>
-                                    <td>Frontend Developer</td>
-                                    <td>Tecnología</td>
-                                    <td><span class="badge bg-success">Activa</span></td>
+                                    <td> 2 </td>
+                                    <td> Juan </td>
+                                    <td> Frontend Developer </td>
+                                    <td> Tecnología </td>
+                                    <td> <span class="badge bg-success"> Activa </span> </td>
                                     <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary"
-                                            onclick="verAspirantes('Frontend Developer')">
-                                            <i class="bi bi-eye me-1"></i> Ver aspirantes
-                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="verAspirantes('Frontend Developer')"> <i class="bi bi-eye me-1"> </i> Ver aspirantes </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
-
                 <!-- ASPIRANTES -->
                 <section id="aspirantes" class="page">
                     <div class="card-box">
-
-                        <h4 class="fw-bold mb-4" id="puestoTitulo"></h4>
-
+                        <h4 class="fw-bold mb-4" id="puestoTitulo"> </h4>
                         <!-- MATCH SUGERIDO -->
-                        <h6 class="fw-bold mb-3">
-                            <i class="bi bi-star-fill text-warning me-2"></i> Aspirantes compatibles
-                        </h6>
+                        <h6 class="fw-bold mb-3"> <i class="bi bi-star-fill text-warning me-2"> </i> Aspirantes compatibles </h6>
                         <table class="table align-middle mb-5">
                             <thead class="table-light">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Profesión</th>
-                                    <th>Estado</th>
-                                    <th class="text-end">Acciones</th>
+                                    <th> ID </th>
+                                    <th> Nombre </th>
+                                    <th> Profesión </th>
+                                    <th> Estado </th>
+                                    <th class="text-end"> Acciones </th>
                                 </tr>
                             </thead>
-                            <tbody id="tablaMatch"></tbody>
+                            <tbody id="tablaMatch">
+                            </tbody>
                         </table>
-
                         <!-- NUEVOS ASPIRANTES -->
-                        <h6 class="fw-bold mb-3">
-                            <i class="bi bi-search me-2"></i> Buscar nuevos aspirantes
-                        </h6>
+                        <h6 class="fw-bold mb-3"> <i class="bi bi-search me-2"> </i> Buscar nuevos aspirantes </h6>
                         <table class="table align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Profesión</th>
-                                    <th>Estado</th>
-                                    <th class="text-end">Acciones</th>
+                                    <th> ID </th>
+                                    <th> Nombre </th>
+                                    <th> Profesión </th>
+                                    <th> Estado </th>
+                                    <th class="text-end"> Acciones </th>
                                 </tr>
                             </thead>
-                            <tbody id="tablaNuevos"></tbody>
+                            <tbody id="tablaNuevos">
+                            </tbody>
                         </table>
-
                     </div>
                 </section>
-
                 <!-- PROCESOS -->
                 <section id="procesos" class="page">
                     <div class="card-box">
-                        <h4 class="fw-bold mb-3">
-                            <i class="bi bi-arrow-repeat me-2"></i> Solicitudes en proceso
-                        </h4>
-
+                        <h4 class="fw-bold mb-3"> <i class="bi bi-arrow-repeat me-2"> </i> Solicitudes en proceso </h4>
                         <table class="table align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Aspirante</th>
-                                    <th>Estado</th>
+                                    <th> ID </th>
+                                    <th> Aspirante </th>
+                                    <th> Estado </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Ana Pérez</td>
-                                    <td><span class="badge bg-warning text-dark">En proceso</span></td>
+                                    <td> 1 </td>
+                                    <td> Ana Pérez </td>
+                                    <td> <span class="badge bg-warning text-dark"> En proceso </span> </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>Juan Ruiz</td>
-                                    <td><span class="badge bg-success">Listo para contratar</span></td>
+                                    <td> 2 </td>
+                                    <td> Juan Ruiz </td>
+                                    <td> <span class="badge bg-success"> Listo para contratar </span> </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
-
             </main>
         </div>
-
         <!-- Modal para ver los aspirantes -->
         <div class="modal fade" id="perfilModal" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
-
                     <div class="modal-header">
-                        <h5 class="modal-title">Perfil del aspirante</h5>
-                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                        <h5 class="modal-title"> Perfil del aspirante </h5>
+                        <button class="btn-close" data-bs-dismiss="modal"> </button>
                     </div>
-
                     <div class="modal-body">
-
                         <!-- HEADER PERFIL -->
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="rounded-circle bg-primary bg-opacity-25 
-                                    d-flex justify-content-center align-items-center" style="width:80px;height:80px;">
-                                <i class="bi bi-person fs-1 text-primary"></i>
-                            </div>
-
+                            <div class="rounded-circle bg-primary bg-opacity-25 d-flex justify-content-center align-items-center"> <i class="bi bi-person fs-1 text-primary"> </i> </div>
                             <div>
-                                <h5 class="mb-0" id="perfilNombre">Nombre Aspirante</h5>
-                                <p class="text-muted mb-0" id="perfilProfesion">Profesión</p>
+                                <h5 class="mb-0" id="perfilNombre"> Nombre Aspirante </h5>
+                                <p class="text-muted mb-0" id="perfilProfesion"> Profesión </p>
                             </div>
                         </div>
                         <!-- INFO -->
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <p><strong>Estado:</strong> <span id="perfilEstado">Disponible</span></p>
-                                <p><strong>Experiencia:</strong> <span id="perfilExperiencia">3 años</span></p>
+                                <p> <strong> Estado: </strong> <span id="perfilEstado"> Disponible </span> </p>
+                                <p> <strong> Experiencia: </strong> <span id="perfilExperiencia"> 3 años </span> </p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Email:</strong> <span id="perfilEmail">correo@mail.com</span></p>
-                                <p><strong>Ubicación:</strong> <span id="perfilUbicacion">Remoto</span></p>
+                                <p> <strong> Email: </strong> <span id="perfilEmail"> correo@mail.com </span> </p>
+                                <p> <strong> Ubicación: </strong> <span id="perfilUbicacion"> Remoto </span> </p>
                             </div>
                         </div>
                         <hr>
                         <!-- SKILLS -->
-                        <h6 class="fw-bold">Skills</h6>
+                        <h6 class="fw-bold"> Skills </h6>
                         <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-primary">Python</span>
-                            <span class="badge bg-primary">Machine Learning</span>
-                            <span class="badge bg-primary">SQL</span>
+                            <span class="badge bg-primary"> Python </span>
+                            <span class="badge bg-primary"> Machine Learning </span>
+                            <span class="badge bg-primary"> SQL </span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <button class="btn btn-success">
-                            <i class="bi bi-check-circle me-1"></i> Iniciar proceso / Match
-                        </button>
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                        <button class="btn btn-success"> <i class="bi bi-check-circle me-1"> </i> Iniciar proceso / Match </button>
                     </div>
                 </div>
             </div>
