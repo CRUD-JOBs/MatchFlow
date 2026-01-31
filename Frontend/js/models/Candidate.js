@@ -9,8 +9,8 @@ export default class Candidate{
         this.isOpen = isOpen;
     }
     static createCandidate({id, name, email, password, isOpen, isAvaiable}){
-        //Verifications for candidate object 
-        return new Candidate(id, name, email, password, isOpen, isAvaiable)
+        if(!id || !name || !email || !password)return null
+        return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false)
     }
     async openToWork(){
         this.openToWork = true;
@@ -23,6 +23,5 @@ export default class Candidate{
     getHired(){
         //code
     }
-    
 
 }
