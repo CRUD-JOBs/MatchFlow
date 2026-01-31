@@ -1,4 +1,4 @@
-import {updateCompany, createJobOffer} from "./../api.js"; import JobOffer from "./JobOffer.js";
+import {updateCompany, createJobOffer, getCompany} from "./../api.js"; import JobOffer from "./JobOffer.js";
 export default class Company{
     constructor(id, name, email, password, JobOffers, matches){
         this.id = id;
@@ -8,6 +8,12 @@ export default class Company{
         this.JobOffers = JobOffers;
         this.matches =  matches;
 
+    }
+    static async createCompany({id}){
+        if(!id) return null //Only confirm email, login lacks distintion between candidate and company, so it need to be rechargued
+        const company = await getCompany(id)
+        return new Company(company.id, company.name, company.email, company.password, company.JobOffer, company.matches)
+            
     }
     createJobOffer(details){
         //code
