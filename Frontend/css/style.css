@@ -1,0 +1,468 @@
+/* ESTILOS GLOBALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f6fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ESTILOS DE LOGIN.HTML Y SIGNUP.HTML */
+#loginContainer, #signupContainer {
+    background: linear-gradient(135deg, #002efd 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+#loginContainer .card, #signupContainer .card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+#loginContainer .logo-image, #signupContainer .logo-image {
+    transition: transform 0.3s ease;
+}
+
+#loginContainer .logo-image:hover, #signupContainer .logo-image:hover {
+    transform: scale(1.05);
+}
+
+#loginContainer .form-control:focus, #signupContainer .form-control:focus, #loginContainer .form-select:focus, #signupContainer .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+#loginContainer .btn-primary, #signupContainer .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+#loginContainer .btn-primary:hover, #signupContainer .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+#loginContainer .input-group-text, #signupContainer .input-group-text {
+    background: transparent;
+}
+
+/* ESTILOS DE INDEX.HTML (PERFIL TRABAJADOR) */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card .shadow-lg {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Columna de foto en index.html */
+.card .col-md-4.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.card .col-md-4 img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid white;
+}
+
+.card .badge.bg-light {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
+
+/* Información personal en index.html */
+.card .col-md-8 h5 {
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.card .col-md-8 strong {
+    color: #555;
+    font-weight: 600;
+}
+
+.card .list-group-item {
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    padding: 12px 0;
+}
+
+.card .badge.bg-secondary {
+    background-color: #667eea !important;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+/* Botones en index.html */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transform: translateY(-2px);
+}
+
+/* ESTILOS DE DASHBOARD.HTML */
+
+/* Navbar Dashboard */
+.navbar {
+    background: white !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .text-primary {
+    color: #2563eb !important;
+    font-size: 1.3rem;
+}
+
+/* Sidebar Dashboard */
+.sidebar {
+    width: 230px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #2563eb, #1e40af);
+    color: white;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed span {
+    display: none;
+}
+
+.sidebar strong {
+    font-size: 1.1rem;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    color: #e0e7ff;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.menu-link:hover, .menu-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: translateX(5px);
+}
+
+.menu-link i {
+    font-size: 1.2rem;
+    min-width: 24px;
+}
+
+/* Botón toggle sidebar */
+#toggleSidebar {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#toggleSidebar:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Contenido principal Dashboard */
+.content {
+    padding: 25px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.card-box {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.card-box:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero section Dashboard */
+.hero {
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+    color: #1e40af;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.hero h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Sistema de páginas SPA */
+.page {
+    display: none;
+}
+
+.active-page {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tablas Dashboard */
+.table {
+    margin-top: 20px;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table thead th {
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #dee2e6;
+    padding: 15px 12px;
+}
+
+.table tbody td {
+    padding: 15px 12px;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.badge.bg-success {
+    background-color: #10b981 !important;
+}
+
+.badge.bg-warning {
+    background-color: #f59e0b !important;
+}
+
+.badge.bg-primary {
+    background-color: #3b82f6 !important;
+}
+
+/* Botones Dashboard */
+.btn-sm {
+    padding: 6px 15px;
+    font-size: 0.875rem;
+}
+
+.btn-outline-primary {
+    border-color: #2563eb;
+    color: #2563eb;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: #10b981;
+    border-color: #10b981;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+    border-color: #059669;
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    transition: all 0.3s ease;
+}
+
+/* Modal Dashboard */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px 25px;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-body .rounded-circle {
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 20px 25px;
+}
+
+/* UTILIDADES Y RESPONSIVIDAD */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.fw-bold {
+    font-weight: 700 !important;
+}
+
+.fw-semibold {
+    font-weight: 600 !important;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+    .sidebar span {
+        display: none;
+    }
+    .content {
+        padding: 15px;
+    }
+    .hero {
+        padding: 20px;
+    }
+    .card-box {
+        padding: 15px;
+    }
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .table {
+        font-size: 0.875rem;
+    }
+    .btn-sm {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+    }
+    .navbar {
+        padding: 10px !important;
+    }
+    .hero h3 {
+        font-size: 1.3rem;
+    }
+    .hero p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ANIMACIONES ADICIONALES */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.card-box {
+    animation: slideInRight 0.4s ease;
+}
+
+/* Estilos para botón de logout */
+.btn-logout {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #bb2d3b;
+    border-color: #bb2d3b;
+    transform: translateY(-2px);
+}

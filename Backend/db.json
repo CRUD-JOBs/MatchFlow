@@ -6,12 +6,20 @@
       "email": "juan@gmail.com",
       "password": "123456",
       "isOpen": false,
-      "isAvaiable":false
+      "isAvaiable": false
     },
     {
       "id": "2",
       "name": "Diego",
       "email": "diego@gmail.com",
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable": false
+    },
+    {
+      "id": "2591",
+      "name": "Santiago",
+      "email": "master@gmail.com",
       "password": "123456",
       "isOpen": false,
       "isAvaiable": false
@@ -26,7 +34,7 @@
       "jobOffers": [
         "1"
       ],
-      "matches":[
+      "matches": [
         "1"
       ]
     },
@@ -39,24 +47,24 @@
       "matches": []
     }
   ],
-  "jobOffers":[
+  "jobOffers": [
     {
-      "id":"1",
-      "company_id":"1",
+      "id": "1",
+      "company_id": "1",
       "candidates": [
-        "1", "2"
+        "1",
+        "2"
       ],
       "details": "Need developers for CRUDZASO",
       "state": "on-going"
     }
-    
   ],
-  "matches":[
+  "matches": [
     {
-      "id":"1",
-      "candidate":"1",
-      "company":"1",
-      "state":"hired"
+      "id": "1",
+      "candidate": "1",
+      "company": "1",
+      "state": "hired"
     }
   ]
 }
