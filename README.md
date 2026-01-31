@@ -302,7 +302,7 @@ http://localhost:3000
 
 ---
 
-## 🌿 Ramas y Control de Versiones
+## Ramas y Control de Versiones
 
 ### Convención de Nombres de Ramas
 
@@ -362,7 +362,7 @@ Este proyecto está bajo la Licencia MIT.
 
 ---
 
-## 📞 Contacto
+## Contacto
 
 - **Discord:** https://discord.gg/twEJJYx7
 - **GitHub:** https://github.com/CRUD-JOBs/MatchFlow.git
@@ -371,7 +371,7 @@ Este proyecto está bajo la Licencia MIT.
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 MatchFlow/
