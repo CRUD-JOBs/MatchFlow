@@ -6,7 +6,8 @@
       "email": "juan@gmail.com",
       "password": "123456",
       "isOpen": true,
-      "isAvaiable": false
+      "isAvaiable": false,
+      "jobOffer_id":"1"
     },
     {
       "id": "2",
@@ -14,7 +15,8 @@
       "email": "diego@gmail.com",
       "password": "123456",
       "isOpen": true,
-      "isAvaiable": false
+      "isAvaiable": false,
+      "jobOffer_id":"1"
     },
     {
       "id": "2591",
@@ -22,7 +24,8 @@
       "email": "master@gmail.com",
       "password": "123456",
       "isOpen": false,
-      "isAvaiable": false
+      "isAvaiable": false,
+      "jobOffer_id":null
     }
   ],
   "companies": [
@@ -55,6 +58,7 @@
         "1",
         "2"
       ],
+      "title": "CRUDZASO Developer",
       "details": "Need developers for CRUDZASO",
       "state": "on-going"
     }
@@ -62,9 +66,17 @@
   "matches": [
     {
       "id": "1",
-      "candidate": "1",
-      "company": "1",
+      "candidate_id": "1",
+      "company_id": "1",
+      "jobOffer_id":"1",
       "state": "hired"
+    }, 
+    {
+      "id": "2",
+      "candidate_id": "2",
+      "company_id": "1",
+      "jobOffer_id":"1",
+      "state": "in-interview"
     }
   ]
 }

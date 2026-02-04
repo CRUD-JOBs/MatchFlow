@@ -195,7 +195,7 @@ export const deleteCompany = async (id) => {
 };
 
 /* API JOB OFFERS METHODS */
-export const getJobOffers = async () => {
+export const getAllJobOffers = async () => {
     try {
         const response = await fetch(`${API_URL}/jobOffers`);
         if (!response.ok) throw new Error('Error fetching job offers');
@@ -205,7 +205,17 @@ export const getJobOffers = async () => {
         throw error;
     }
 };
-
+export const getJobOffers = async (...ids) => {
+    try {
+        const query = ids.map(id => `${id}`).join(','); //Create the query string
+        const response = await fetch(`${API_URL}/jobOffers?id_in=${query}`);
+        if (!response.ok) throw new Error('Error fetching job offers');
+        return await response.json();
+    } catch (error) {
+        console.error('Error in getJobOffers:', error);
+        throw error;
+    }
+};
 export const getJobOffer = async (id) => {
     try {
         const response = await fetch(`${API_URL}/jobOffers/${id}`);
@@ -276,7 +286,7 @@ export const deleteJobOffer = async (id) => {
 };
 
 /* API MATCHES METHODS */
-export const getMatches = async () => {
+export const getAllMatches = async () => {
     try {
         const response = await fetch(`${API_URL}/matches`);
         if (!response.ok) throw new Error('Error fetching matches');
@@ -286,7 +296,17 @@ export const getMatches = async () => {
         throw error;
     }
 };
-
+export const getMatches = async (...ids) => {
+    try {
+        const query = ids.map(id => `${id}`).join(',');
+        const response = await fetch(`${API_URL}/matches?id_in=${query}`);
+        if (!response.ok) throw new Error('Error fetching matches');
+        return await response.json();
+    } catch (error) {
+        console.error('Error in getMatches:', error);
+        throw error;
+    }
+}
 export const getMatchesByCompany = async (company_id) => {
     try {
         const response = await fetch(`${API_URL}/matches?company=${company_id}`, {
