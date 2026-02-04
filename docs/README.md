@@ -117,3 +117,10 @@ A continuación las historias de usuario y criterios de aceptación para el proy
         - [ ] El proyecto utiliza Git con commits claros.
         - [ ] Existe un README con instrucciones de instalación, uso y desarrollo.
         - [ ] Las decisiones técnicas importantes están documentadas (estructura de datos, endpoints, flujo de reserva, etc.).
+# LEER NUEVO GRUPO
+- Este proyecto está basado en modelos -> Cada modelo es una clase de js que contiene los métodos relacionados con su objeto en el archivo db.json
+- NO ESTA TERMINADO, se intentó utilizar métodología SCRUM, las funcionalidades básicas no se han integrado
+- YA EXISTEN los métodos definidos para todas las operaciones CRUD necesarias para todas las user stories descritas más arriba, aún no han sido integradas con el FRONT a través de botones y una inicialización de objeto
+- Lógica: -> Desde el archivo initializeCompany, se extraen los datos guardados en sessionStorage/localStorage para CREAR un nuevo OBJETO COMPANY (new Company())
+    - Se crean addEventListeners (click, submit) para rastrear el "target" del evento, y si es un botón válido ejecutar uno de los métodos del OBJETO company
+        - Ejemplo-> se hace click botón "hacer match" -> AddEventListener lo captura, se llama el método **reserveCandidate(candidate_id, offer_id)** (Si no hay errores, que puede haber, el archivo db.json debería de actualizarse como corresponde)
