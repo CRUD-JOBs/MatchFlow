@@ -7,7 +7,7 @@
       "password": "123456",
       "isOpen": true,
       "isAvaiable": false,
-      "jobOffer_id":"1"
+      "jobOffer_id": "1"
     },
     {
       "id": "2",
@@ -16,7 +16,7 @@
       "password": "123456",
       "isOpen": true,
       "isAvaiable": false,
-      "jobOffer_id":"1"
+      "jobOffer_id": "1"
     },
     {
       "id": "2591",
@@ -25,7 +25,7 @@
       "password": "123456",
       "isOpen": false,
       "isAvaiable": false,
-      "jobOffer_id":null
+      "jobOffer_id": null
     }
   ],
   "companies": [
@@ -68,14 +68,14 @@
       "id": "1",
       "candidate_id": "1",
       "company_id": "1",
-      "jobOffer_id":"1",
+      "jobOffer_id": "1",
       "state": "hired"
-    }, 
+    },
     {
       "id": "2",
       "candidate_id": "2",
       "company_id": "1",
-      "jobOffer_id":"1",
+      "jobOffer_id": "1",
       "state": "in-interview"
     }
   ]

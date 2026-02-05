@@ -1,8 +1,8 @@
 import Company from "../models/Company.js"
 const initializeCompany = ()=>{
-    const company = Company.createCompany(JSON.parse(sessionStorage.getItem("currentUser")))
+    const company = Company.createCompany(JSON.parse(LocalStorage.getItem("currentUser")))
     if(company===null)return
-    sessionStorage.setItem("currentUser", JSON.stringify(company)) //set the company object to store the lists
+    Localtorage.setItem("currentUser", JSON.stringify(company)) //set the company object to store the lists
     
 }
 

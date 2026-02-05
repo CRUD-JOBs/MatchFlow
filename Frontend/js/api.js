@@ -394,7 +394,7 @@ export const deleteMatch = async (id) => {
 /* SESSION MANAGEMENT METHODS */
 export const saveSession = (user) => {
     // IMPORTANT: new logic -> only store id + company/candidate, the id will be used with the API inside the initializers to interactivity
-    sessionStorage.setItem('currentUser', JSON.stringify({
+    localStorage.setItem('currentUser', JSON.stringify({
         id: user.id,
         name: user.name,
         email: user.email,
@@ -404,12 +404,12 @@ export const saveSession = (user) => {
 };
 
 export const getCurrentSession = () => {
-    const session = sessionStorage.getItem('currentUser');
+    const session = localStorage.getItem('currentUser');
     return session ? JSON.parse(session) : null;
 };
 
 export const clearSession = () => {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
 };
 
 export const isAuthenticated = () => {
