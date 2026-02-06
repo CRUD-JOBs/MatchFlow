@@ -10,6 +10,7 @@ export default class Candidate{
         this.isOpen = isOpen;
         this.jobOffer_id = jobOffer;
     }
+    
     static createCandidate({id = null, name = null, email = null, password = null, isOpen = null, isAvaiable = null, jobOffer = null}){
         if(!id || !name || !email || !password)return null
         return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false, jobOffer || null)

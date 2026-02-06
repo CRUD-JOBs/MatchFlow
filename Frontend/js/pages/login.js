@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function handleLogin(e) {
     e.preventDefault();
     // Obtener valores del formulario
-    const name = document.getElementById('loginFullname').value.trim();
+    //const name = document.getElementById('loginFullname').value.trim();
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
     const role = document.getElementById('loginRole').value;
@@ -29,7 +29,7 @@ async function handleLogin(e) {
         return;
     }
     // Validar campos vacíos
-    if (!name || !email || !password) {
+    if (!email || !password) {
         showError('Por favor, completa todos los campos');
         return;
     }
@@ -51,9 +51,9 @@ async function handleLogin(e) {
             user = await authenticateCompany(email, password);
         }
         // Verificar que el nombre coincida
-        if (user.name.toLowerCase() !== name.toLowerCase()) {
+        /*if (user.name.toLowerCase() !== name.toLowerCase()) {
             throw new Error('El nombre no coincide con la cuenta');
-        }
+        }*/
         // Guardar sesión
         saveSession(user);
         // Mostrar mensaje de éxito
