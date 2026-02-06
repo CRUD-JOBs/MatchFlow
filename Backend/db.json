@@ -2,89 +2,110 @@
   "candidates": [
     {
       "id": "1",
-      "name": "Juan",
-      "email": "juan@gmail.com",
-      "password": "123456",
-      "isOpen": true,
-      "isAvaiable": false,
-      "jobOffer_id": "1"
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "password": "123",
+      "role": "candidate",
+      "isAvailable": true,
+      "skills": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "experience": "2 años",
+      "processStatus": "pendiente",
+      "assignedCompanyId": "1",
+      "reservedBy": "1"
     },
     {
-      "id": "2",
-      "name": "Diego",
-      "email": "diego@gmail.com",
-      "password": "123456",
-      "isOpen": true,
-      "isAvaiable": false,
-      "jobOffer_id": "1"
+      "id": "30f8",
+      "name": "user",
+      "email": "user@user.com",
+      "password": "123",
+      "role": "candidate",
+      "isAvailable": true,
+      "skills": [],
+      "experience": "",
+      "processStatus": "pendiente",
+      "assignedCompanyId": null,
+      "reservedBy": null
     },
     {
-      "id": "2591",
-      "name": "Santiago",
-      "email": "master@gmail.com",
-      "password": "123456",
-      "isOpen": false,
-      "isAvaiable": false,
-      "jobOffer_id": null
+      "id": "aa4b",
+      "name": "2",
+      "email": "2@2",
+      "password": "123",
+      "role": "candidate",
+      "isAvailable": true,
+      "skills": [],
+      "experience": "",
+      "processStatus": "pendiente",
+      "assignedCompanyId": null,
+      "reservedBy": null
     },
     {
-      "id": "27f3",
-      "name": "Anderson Guzman",
-      "email": "and.guz8a@gmail.com",
-      "password": "123456",
-      "isOpen": true,
-      "isAvaiable": false
+      "id": "6607",
+      "name": "user2",
+      "email": "user2@user2.com",
+      "password": "123",
+      "role": "candidate",
+      "isAvailable": true,
+      "skills": [],
+      "experience": "",
+      "processStatus": "pendiente",
+      "assignedCompanyId": null,
+      "reservedBy": null
     }
   ],
   "companies": [
     {
       "id": "1",
-      "name": "Riwi",
-      "email": "riwi@riwi.io",
-      "password": "123456",
-      "jobOffers": [
-        "1"
-      ],
-      "matches": [
-        "1"
-      ]
+      "name": "Tech Solutions",
+      "email": "hr@tech.com",
+      "password": "123",
+      "role": "company",
+      "description": "Empresa de desarrollo de software"
     },
     {
-      "id": "2",
-      "name": "Rappi",
-      "email": "rappi@rappi.io",
-      "password": "123456",
-      "jobOffers": [],
-      "matches": []
+      "id": "0a6f",
+      "name": "Compatech",
+      "email": "com@com.com",
+      "password": "123",
+      "role": "company",
+      "description": ""
     }
   ],
-  "jobOffers": [
+  "jobs": [
     {
       "id": "1",
-      "company_id": "1",
-      "candidates": [
-        "1",
-        "2"
-      ],
-      "title": "CRUDZASO Developer",
-      "details": "Need developers for CRUDZASO",
-      "state": "on-going"
-    }
-  ],
-  "matches": [
-    {
-      "id": "1",
-      "candidate_id": "1",
-      "company_id": "1",
-      "jobOffer_id": "1",
-      "state": "hired"
+      "companyId": "1",
+      "title": "Desarrollador Frontend",
+      "description": "Buscamos experto en Bootstrap",
+      "status": "Activa"
     },
     {
-      "id": "2",
-      "candidate_id": "2",
-      "company_id": "1",
-      "jobOffer_id": "1",
-      "state": "in-interview"
+      "id": "f610",
+      "companyId": "1",
+      "title": "Ingeniero de datos",
+      "category": "Tecnología",
+      "description": "Bases de datos",
+      "status": "Activa"
+    },
+    {
+      "id": "d601",
+      "companyId": "0a6f",
+      "title": "Ingeniero",
+      "category": "Tecnología",
+      "description": "Tecnología",
+      "status": "Activa"
+    }
+  ],
+  "applications": [
+    {
+      "id": "1",
+      "jobId": "1",
+      "candidateId": "1",
+      "status": "pending"
     }
   ]
 }

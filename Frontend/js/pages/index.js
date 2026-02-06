@@ -1,148 +1,98 @@
-import Candidate from "../models/Candidate.js";
+import { getCurrentUser } from '../auth.js';
+import { Candidate } from '../models/Candidate.js';
 
-const renderCandidate = async () => {
-    const candidate = Candidate.createCandidate(
-        JSON.parse(sessionStorage.getItem("currentUser"))
+document.addEventListener('DOMContentLoaded', async () => {
+    const user = getCurrentUser();
+
+    // 1. Verificación de sesión
+    if (!user || user.role !== 'candidate') {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // 2. Instancia del modelo
+    const currentCandidate = new Candidate(
+        user.id, 
+        user.name, 
+        user.email, 
+        user.isAvailable, 
+        user.skills, 
+        user.experience
     );
 
-    console.log(candidate);
+    // 3. Selección de elementos del DOM
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+    const availabilityBtn = document.getElementById('availabilityBtn');
+    const statusBadge = document.getElementById('statusBadge');
+    const jobsTableBody = document.querySelector('#jobsTable tbody');
 
-    if (candidate === null) return;
+    /**
+     * Inyecta los datos del usuario en el HTML
+     */
+    const loadProfileData = () => {
+        if (profileName) profileName.textContent = currentCandidate.name;
+        if (profileEmail) profileEmail.textContent = currentCandidate.email;
+    };
 
-    const message = document.getElementById("profileMessage");
+    /**
+     * Actualiza la interfaz según la disponibilidad
+     */
+    const updateUIStatus = (isAvailable) => {
+        if (!statusBadge || !availabilityBtn) return;
 
-    const nameEl = document.querySelector("[data-user-name]");
-    const activeBadge = document.querySelector("[data-user-active]");
-    const emailEl = document.querySelector("[data-user-email]");
-    const phoneEl = document.querySelector("[data-user-phone]");
-    const cityEl = document.querySelector("[data-user-city]");
-
-    nameEl.textContent = candidate.name;
-    emailEl.textContent = candidate.email;
-    phoneEl.textContent = candidate.phone || "No registrado";
-    cityEl.textContent = candidate.city || "No registrada";
-
-    activeBadge.textContent = candidate.isOpen ? "Activo" : "Inactivo";
-    activeBadge.className = candidate.isOpen
-        ? "badge bg-success"
-        : "badge bg-secondary";
-
-    const btn = document.querySelector("[data-user-work]");
-    btn.textContent = candidate.isOpen ? "Desactivar" : "Activar";
-
-    btn.addEventListener("click", async () => {
-        if (candidate.isOpen) {
-            await candidate.closeToWork();
-            btn.textContent = "Activar";
-
-            activeBadge.textContent = "Inactivo";
-            activeBadge.className = "badge bg-secondary";
+        if (isAvailable) {
+            statusBadge.textContent = "Disponible";
+            statusBadge.className = "badge bg-success p-2 fs-6";
+            availabilityBtn.textContent = "Desactivar Disponibilidad";
+            availabilityBtn.className = "btn btn-danger";
         } else {
-            await candidate.openToWork();
-            btn.textContent = "Desactivar";
-
-            activeBadge.textContent = "Activo";
-            activeBadge.className = "badge bg-success";
+            statusBadge.textContent = "Búsqueda Pausada";
+            statusBadge.className = "badge bg-secondary p-2 fs-6";
+            availabilityBtn.textContent = "Activar Disponibilidad";
+            availabilityBtn.className = "btn btn-primary";
         }
+    };git
 
-        sessionStorage.setItem("currentUser", JSON.stringify(candidate));
-    });
+    // 4. Inicialización
+    loadProfileData();
+    updateUIStatus(currentCandidate.isAvailable);
 
-    const editBtn = document.querySelector("[data-edit-profile]");
-    let isEditing = false;
-
-    editBtn.addEventListener("click", () => {
-        if (!isEditing) {
-            convertNameToInput();
-            convertEmailToInput();
-            convertPhoneToInput();
-            convertCityToInput();
-
-            editBtn.textContent = "Guardar cambios";
-            isEditing = true;
-        } else {
-            getEditedValues();
-            restoreProfileView();
-
-            editBtn.textContent = "Editar perfil";
-            isEditing = false;
-
+    // 5. Evento para cambiar disponibilidad
+    if (availabilityBtn) {
+        availabilityBtn.addEventListener('click', async () => {
+            const newStatus = !currentCandidate.isAvailable;
+            const updated = await currentCandidate.updateAvailability(newStatus);
             
-            message.textContent = "Perfil actualizado correctamente ✅";
-            message.className = "text-success mt-2";
+            if (updated) {
+                currentCandidate.isAvailable = newStatus;
+                user.isAvailable = newStatus;
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+                updateUIStatus(newStatus);
+            }
+        });
+    }
 
-            setTimeout(() => {
-                message.textContent = "";
-            }, 3000);
+    // 6. Carga de ofertas de trabajo
+    const loadJobs = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/jobs');
+            const jobs = await response.json();
+            
+            if (jobsTableBody) {
+                jobsTableBody.innerHTML = jobs.map(job => `
+                    <tr>
+                        <td>${job.title}</td>
+                        <td>${job.description}</td>
+                        <td><span class="badge bg-info text-dark">${job.status}</span></td>
+                        
+                    </tr>
+                `).join('');
+            }
+        } catch (error) {
+            console.error("Error al cargar ofertas:", error);
         }
-    });
-};
+    };
 
-
-
-function convertNameToInput() {
-    convertToInput("[data-user-name]", "text");
-}
-
-function convertEmailToInput() {
-    convertToInput("[data-user-email]", "email");
-}
-
-function convertPhoneToInput() {
-    convertToInput("[data-user-phone]", "tel");
-}
-
-function convertCityToInput() {
-    convertToInput("[data-user-city]", "text");
-}
-
-function convertToInput(selector, type) {
-    const element = document.querySelector(selector);
-    const value = element.textContent.trim();
-
-    const input = document.createElement("input");
-    input.type = type;
-    input.value = value;
-    input.className = "form-control";
-    input.setAttribute(selector.replace("[", "").replace("]", ""), "");
-
-    element.replaceWith(input);
-}
-
-
-function getEditedValues() {
-    const candidate = JSON.parse(sessionStorage.getItem("currentUser"));
-
-    candidate.name = document.querySelector("[data-user-name]").value;
-    candidate.email = document.querySelector("[data-user-email]").value;
-    candidate.phone = document.querySelector("[data-user-phone]").value;
-    candidate.city = document.querySelector("[data-user-city]").value;
-
-    sessionStorage.setItem("currentUser", JSON.stringify(candidate));
-
-    console.log("DATOS EDITADOS:", candidate);
-}
-
-
-function restoreProfileView() {
-    restoreField("[data-user-name]");
-    restoreField("[data-user-email]");
-    restoreField("[data-user-phone]");
-    restoreField("[data-user-city]");
-}
-
-function restoreField(selector) {
-    const input = document.querySelector(selector);
-    if (!input) return;
-
-    const p = document.createElement("p");
-    p.textContent = input.value || "No registrado";
-
-    const attr = selector.replace("[", "").replace("]", "");
-    p.setAttribute(attr, "");
-
-    input.replaceWith(p);
-}
-
-
-document.addEventListener("DOMContentLoaded", renderCandidate);
+    loadJobs();
+});

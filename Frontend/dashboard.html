@@ -1,520 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> Empresa | MatchFlow </title>
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    </head>
-    <body>
-        <!-- NAVBAR -->
-        <nav class="navbar shadow-sm px-4 py-2 d-flex justify-content-between">
-            <span class="fw-bold text-primary"> <i class="bi bi-people-fill"> </i> MatchFlow </span>
-            <div class="d-flex gap-2">
-                <!--  -->
-                <button 
-                class="btn btn-outline-primary btn-sm"
-                data-bs-toggle="modal"
-                data-bs-target="#companyProfileModal"
-                >
-                <i class="bi bi-person-circle me-1"></i>
-                Ver perfil
-                </button>
-                <!--  -->
-                <button class="btn btn-outline-danger btn-sm btn-logout" id="logoutBtn"> <i class="bi bi-box-arrow-right me-1"> </i> Cerrar Sesión </button>
-            </div>
-        </nav>
-        <div class="d-flex">
-            <!-- ASIDE -->
-            <aside id="sidebar" class="sidebar p-3">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <strong> <span> Menú </span> </strong>
-                    <button id="toggleSidebar" class="btn btn-sm btn-light"> <i class="bi bi-list"> </i> </button>
-                </div>
-                <div class="menu-link active" data-page="dashboard"> <i class="bi bi-speedometer2"> </i> <span> Dashboard </span> </div>
-                <div class="menu-link" data-page="solicitudes"> <i class="bi bi-briefcase"> </i> <span> Solicitudes </span> </div>
-                <div class="menu-link" data-page="procesos"> <i class="bi bi-arrow-repeat"> </i> <span> Solicitudes en proceso </span> </div>
-            </aside>
-            <!-- MAIN -->
-            <main class="content">
-                <div class="hero">
-                    <h3 class="fw-bold mb-1 text-center" data-user-name> Nombre Empresa </h3>
-                    <p class="mb-0 text-center"> Sector: Tecnología · Vacantes activas: 2 · Procesos en curso: 1 </p>
-                </div>
-                <!-- DASHBOARD -->
-                <section id="dashboard" class="page active-page">
-                    <div class="card-box">
-                        <h4 class="fw-bold mb-3"> <i class="bi bi-speedometer2 me-2"> </i> Dashboard </h4>
-                        <p class="text-muted"> Bienvenido al panel de administración de MatchFlow. </p>
-                        <div class="row mt-4">
-                            <div class="col-md-4 mb-3">
-                                <div class="card border-0 shadow-sm">
-                                    <div class="card-body text-center"> <i class="bi bi-briefcase-fill text-primary"> </i>
-                                        <h3 class="mt-3 mb-0"> 2 </h3>
-                                        <p class="text-muted mb-0"> Vacantes Activas </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card border-0 shadow-sm">
-                                    <div class="card-body text-center"> <i class="bi bi-people-fill text-success"> </i>
-                                        <h3 class="mt-3 mb-0"> 15 </h3>
-                                        <p class="text-muted mb-0"> Candidatos </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card border-0 shadow-sm">
-                                    <div class="card-body text-center"> <i class="bi bi-arrow-repeat text-warning"> </i>
-                                        <h3 class="mt-3 mb-0"> 1 </h3>
-                                        <p class="text-muted mb-0"> En Proceso </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- SOLICITUDES -->
-                <section id="solicitudes" class="page">
-                    <div class="card-box">
-                        <h4 class="fw-bold mb-4"> <i class="bi bi-briefcase me-2"> </i> Solicitudes de empleo </h4>
-                        <table class="table align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th> ID </th>
-                                    <!-- <th> Nombre </th> -->
-                                    <th> Puesto </th>
-                                    <th> Área </th>
-                                    <th> Estado </th>
-                                    <th class="text-end"> Acciones </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> 1 </td>
-                                    <td> Desarrollador IA </td>
-                                    <td> Tecnología </td>
-                                    <td> <span class="badge bg-success"> Activa </span> </td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary"
-                                            onclick="verAspirantes('Desarrollador IA')">
-                                            <i class="bi bi-eye me-1"></i> Ver aspirantes
-                                        </button>
-                                    </td>
-                                </tr>
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title> Empresa | MatchFlow </title>
+       <link rel="stylesheet" href="./css/style.css">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+   </head>
+   <body>
+       <nav class="navbar shadow-sm px-4 py-2 d-flex justify-content-between">
+           <span class="fw-bold text-primary"> <i class="bi bi-people-fill"> </i> MatchFlow </span>
+           <div class="d-flex gap-2">
+               <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#companyProfileModal">
+                   <i class="bi bi-person-circle me-1"></i> Ver perfil
+               </button>
+               <button class="btn btn-outline-danger btn-sm btn-logout" id="logoutBtn"> 
+                   <i class="bi bi-box-arrow-right me-1"> </i> Cerrar Sesión 
+               </button>
+           </div>
+       </nav>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>Frontend Developer</td>
-                                    <td>Tecnología</td>
-                                    <td><span class="badge bg-success">Activa</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-primary"
-                                            onclick="verAspirantes('Frontend Developer')">
-                                            <i class="bi bi-eye me-1"></i> Ver aspirantes
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+       <div class="d-flex">
+           <aside id="sidebar" class="sidebar p-3">
+               <div class="d-flex justify-content-between align-items-center mb-3">
+                   <strong> <span> Menú </span> </strong>
+                   <button id="toggleSidebar" class="btn btn-sm btn-light"> <i class="bi bi-list"> </i> </button>
+               </div>
+               <div class="menu-link active" data-page="dashboard"> <i class="bi bi-speedometer2"> </i> <span> Dashboard </span> </div>
+               <div class="menu-link" data-page="misofertas"> <i class="bi bi-briefcase"> </i> <span> Mis Ofertas </span> </div>
+               <div class="menu-link" data-page="procesos"> <i class="bi bi-arrow-repeat"> </i> <span> Gestión de Candidatos </span> </div>
+           </aside>
 
-                <!-- ASPIRANTES -->
-                <section id="aspirantes" class="page">
-                    <div class="card-box">
+           <main class="content">
+               <div class="hero">
+                   <h3 class="fw-bold mb-1 text-center" id="companyNameDisplay"> Cargando Empresa... </h3>
+                   <p class="mb-0 text-center" id="companyInfoSubtitle"> Sector: Tecnología · MatchFlow Enterprise </p>
+               </div>
 
-                        <h4 class="fw-bold mb-4" id="puestoTitulo"></h4>
+               <section id="dashboard" class="page active-page">
+                   <div class="card-box">
+                       <h4 class="fw-bold mb-3"> <i class="bi bi-speedometer2 me-2"> </i> Dashboard </h4>
+                       
+                       <div class="row mt-4">
+                           <div class="col-md-4 mb-3">
+                               <div class="card border-0 shadow-sm text-center p-3">
+                                   <i class="bi bi-briefcase-fill text-primary fs-3"> </i>
+                                   <h3 class="mt-2 mb-0" id="totalJobs"> 0 </h3>
+                                   <p class="text-muted mb-0"> Mis Ofertas </p>
+                               </div>
+                           </div>
+                           <div class="col-md-4 mb-3">
+                               <div class="card border-0 shadow-sm text-center p-3">
+                                   <i class="bi bi-people-fill text-success fs-3"> </i>
+                                   <h3 class="mt-2 mb-0" id="totalCandidates"> 0 </h3>
+                                   <p class="text-muted mb-0"> Candidatos Globales </p>
+                               </div>
+                           </div>
+                           <div class="col-md-4 mb-3">
+                               <div class="card border-0 shadow-sm text-center p-3">
+                                   <i class="bi bi-arrow-repeat text-warning fs-3"> </i>
+                                   <h3 class="mt-2 mb-0" id="activeProcesses"> 0 </h3>
+                                   <p class="text-muted mb-0"> En Mi Proceso </p>
+                               </div>
+                           </div>
+                       </div>
 
-                        <!-- MATCH SUGERIDO -->
-                        <h6 class="fw-bold mb-3">
-                            <i class="bi bi-star-fill text-warning me-2"></i> Aspirantes compatibles
-                        </h6>
-                        <table class="table align-middle mb-5">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Profesión</th>
-                                    <th>Estado</th>
-                                    <th class="text-end">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaMatch"></tbody>
-                        </table>
+                       <div class="card border-0 shadow-sm mt-4 p-4">
+                           <h5 class="fw-bold mb-4"> <i class="bi bi-plus-circle me-2"></i> Publicar Nueva Oferta </h5>
+                           <form id="createJobForm">
+                               <div class="row">
+                                   <div class="col-md-6 mb-3">
+                                       <label class="form-label fw-bold">Título del Puesto</label>
+                                       <input type="text" id="jobTitleInput" class="form-control" placeholder="Ej: Backend Developer" required>
+                                   </div>
+                                   <div class="col-md-6 mb-3">
+                                       <label class="form-label fw-bold">Área</label>
+                                       <select id="jobCategoryInput" class="form-select" required>
+                                           <option value="Tecnología">Tecnología</option>
+                                           <option value="Diseño">Diseño</option>
+                                           <option value="Ventas">Ventas</option>
+                                       </select>
+                                   </div>
+                               </div>
+                               <div class="mb-3">
+                                   <label class="form-label fw-bold">Descripción</label>
+                                   <textarea id="jobDescriptionInput" class="form-control" rows="3" required></textarea>
+                               </div>
+                               <button type="submit" class="btn btn-primary"> Publicar Vacante </button>
+                           </form>
+                       </div>
+                   </div>
+               </section>
 
-                        <!-- NUEVOS ASPIRANTES -->
-                        <h6 class="fw-bold mb-3">
-                            <i class="bi bi-search me-2"></i> Buscar nuevos aspirantes
-                        </h6>
-                        <table class="table align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Profesión</th>
-                                    <th>Estado</th>
-                                    <th class="text-end">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaNuevos"></tbody>
-                        </table>
+               <section id="misofertas" class="page">
+                   <div class="card-box">
+                       <h4 class="fw-bold mb-4"> <i class="bi bi-briefcase me-2"> </i> Mis Ofertas Publicadas </h4>
+                       <table class="table align-middle">
+                           <thead class="table-light">
+                               <tr>
+                                   <th> ID </th>
+                                   <th> Puesto </th>
+                                   <th> Área </th>
+                                   <th> Estado </th>
+                                   <th class="text-end"> Acciones </th>
+                               </tr>
+                           </thead>
+                           <tbody id="jobsTableBody">
+                               </tbody>
+                       </table>
+                   </div>
+               </section>
 
-                    </div>
-                </section>
+               <section id="procesos" class="page">
+                   <div class="card-box">
+                       <h4 class="fw-bold mb-4"> <i class="bi bi-people me-2"> </i> Gestión de Candidatos </h4>
+                       <div class="table-responsive">
+                           <table class="table align-middle">
+                               <thead class="table-light">
+                                   <tr>
+                                       <th>Nombre</th>
+                                       <th>Perfil</th>
+                                       <th>Disponibilidad</th>
+                                       <th>Estado Proceso</th>
+                                       <th class="text-end">Acciones</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="candidatesTableBody">
+                                   </tbody>
+                           </table>
+                       </div>
+                   </div>
+               </section>
+           </main>
+       </div>
 
-                <!-- PROCESOS -->
-                <section id="procesos" class="page">
-                    <div class="card-box">
-                        <h4 class="fw-bold mb-3">
-                            <i class="bi bi-arrow-repeat me-2"></i> Solicitudes en proceso
-                        </h4>
-
-                        <table class="table align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>nombre</th>
-                                    <th>Puesto</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ana Pérez</td>
-                                    <td>Frontend developer</td>
-                                    <td>
-                                        <span class="badge bg-warning text-dark">En proceso</span>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editProcessModal">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Editar proceso
-                                    </button>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Juan Ruiz</td>                                    
-                                    <td>Frontend develovper</td>
-                                    <td><span class="badge bg-success">Listo para contratar</span></td>
-                                    <td>
-                                    <!-- link al modal de editar perfil, el boton cambienlo con js -->
-                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editProcessModal">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Editar proceso
-                                    </button>
-
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-            </main>
-        </div>
-
-        <!-- Modal para ver los aspirantes -->
-        <div class="modal fade" id="perfilModal" tabindex="-1">
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title">Perfil del aspirante</h5>
-                        <button class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <!-- HEADER PERFIL -->
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="rounded-circle bg-primary bg-opacity-25 
-                                    d-flex justify-content-center align-items-center" style="width:80px;height:80px;">
-                                <i class="bi bi-person fs-1 text-primary"></i>
-                            </div>
-
-                            <div>
-                                <h5 class="mb-0" id="perfilNombre">Nombre Aspirante</h5>
-                                <p class="text-muted mb-0" id="perfilProfesion">Profesión</p>
-                            </div>
-                        </div>
-                        <!-- INFO -->
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <p><strong>Estado:</strong> <span id="perfilEstado">Disponible</span></p>
-                                <p><strong>Experiencia:</strong> <span id="perfilExperiencia">3 años</span></p>
-                            </div>
-                            <div class="col-md-6">
-                                <p><strong>Email:</strong> <span id="perfilEmail">correo@mail.com</span></p>
-                                <p><strong>Ubicación:</strong> <span id="perfilUbicacion">Remoto</span></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <!-- SKILLS -->
-                        <h6 class="fw-bold">Skills</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-primary">Python</span>
-                            <span class="badge bg-primary">Machine Learning</span>
-                            <span class="badge bg-primary">SQL</span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                       <!--  -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-   <!-- modal para editar proceso de un aspirante -->
-      
-   <div class="modal fade" id="editProcessModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content rounded-4 shadow">
-
-      <!-- Header -->
-      <div class="modal-header text-white" style="background:#6f5cc2;">
-        <h5 class="modal-title">
-          <i class="bi bi-person-lines-fill me-2"></i>
-          Editar proceso del candidato
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Body -->
-      <div class="modal-body">
-
-        <!-- Info principal -->
-        <div class="row g-3 mb-3">
-          <div class="col-md-4">
-            <small class="text-muted">ID Candidato</small>
-            <div class="fw-semibold">#1023</div>
-          </div>
-          <div class="col-md-4">
-            <small class="text-muted">Nombre</small>
-            <div class="fw-semibold">Juan Pérez</div>
-          </div>
-          <div class="col-md-4">
-            <small class="text-muted">Puesto</small>
-            <div class="fw-semibold">Frontend Developer</div>
-          </div>
-        </div>
-
-        <hr>
-
-        <!-- Estado -->
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <label class="form-label fw-semibold">Estado del proceso</label>
-            <select class="form-select">
-              <option>En proceso</option>
-              <option>Preseleccionado</option>
-              <option>Rechazado</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Skills -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Skills</label>
-          <div class="d-flex flex-wrap gap-2">
-            <span class="badge rounded-pill bg-primary">HTML</span>
-            <span class="badge rounded-pill bg-primary">CSS</span>
-            <span class="badge rounded-pill bg-primary">JavaScript</span>
-            <span class="badge rounded-pill bg-primary">Bootstrap</span>
-          </div>
-        </div>
-
-        <!-- Comentarios -->
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Comentarios</label>
-          <textarea class="form-control" rows="4" placeholder="Observaciones del proceso..."></textarea>
-        </div>
-
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer">
-        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button class="btn btn-success">
-          <i class="bi bi-check-circle"></i>
-          Guardar cambios
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!--  -->
-
-<!-- modal para ver info de la empresa -->
-
-<div class="modal fade" id="companyProfileModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content border-0 rounded-4 shadow-lg">
-
-      <!-- HERO HEADER -->
-      <div class="modal-header border-0 text-white"
-           style="background:linear-gradient(135deg,#6366f1,#4f46e5);">
-        <div class="d-flex align-items-center gap-3">
-          <div class="bg-white text-primary rounded-circle p-3 shadow">
-            <i class="bi bi-building fs-3"></i>
-          </div>
-          <div>
-            <h4 class="mb-0">RIWI</h4>
-            <small class="opacity-75">Empresa de desarollo web</small>
-          </div>
-        </div>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- BODY -->
-      <div class="modal-body px-4 py-4">
-
-        <!-- MÉTRICAS -->
-        <div class="row text-center mb-4">
-          <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-3">
-              <i class="bi bi-people-fill text-primary fs-4"></i>
-              <div class="fw-bold mt-1">+1,200</div>
-              <small class="text-muted">Empleados</small>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-3">
-              <i class="bi bi-globe text-primary fs-4"></i>
-              <div class="fw-bold mt-1">Colombia</div>
-              <small class="text-muted">Presencia en varias ciudades</small>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-3">
-              <i class="bi bi-briefcase-fill text-primary fs-4"></i>
-              <div class="fw-bold mt-1">Tecnología</div>
-              <small class="text-muted">Industria</small>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-3">
-              <i class="bi bi-house-door-fill text-primary fs-4"></i>
-              <div class="fw-bold mt-1">Remoto</div>
-              <small class="text-muted">Modalidad</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- SOBRE LA EMPRESA -->
-        <div class="mb-4">
-          <h5 class="fw-bold">Sobre la empresa</h5>
-          <p class="text-muted">
-            info riwi
-          </p>
-        </div>
-
-        <!-- MISIÓN / VISIÓN -->
-        <div class="row mb-4">
-          <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 p-3">
-              <h6 class="fw-bold">
-                <i class="bi bi-bullseye me-2 text-primary"></i>Misión
-              </h6>
-              <p class="text-muted mb-0">
-                Transformar negocios a través de tecnología innovadora y equipos de alto impacto.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 p-3">
-              <h6 class="fw-bold">
-                <i class="bi bi-eye me-2 text-primary"></i>Visión
-              </h6>
-              <p class="text-muted mb-0">
-                Ser referentes globales en innovación, talento y cultura digital.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- TECNOLOGÍAS -->
-        <div class="mb-4">
-          <h5 class="fw-bold">Stack tecnológico</h5>
-          <div class="d-flex flex-wrap gap-2">
-            <span class="badge rounded-pill bg-primary">JavaScript</span>
-            <span class="badge rounded-pill bg-primary">React</span>
-            <span class="badge rounded-pill bg-primary">Node.js</span>
-            <span class="badge rounded-pill bg-primary">Python</span>
-            <span class="badge rounded-pill bg-primary">AWS</span>
-            <span class="badge rounded-pill bg-primary">Docker</span>
-            <span class="badge rounded-pill bg-primary">PostgreSQL</span>
-          </div>
-        </div>
-
-        <!-- BENEFICIOS -->
-        <div class="mb-4">
-          <h5 class="fw-bold">Beneficios</h5>
-          <div class="row">
-            <div class="col-md-6">
-              <ul class="list-unstyled text-muted">
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Trabajo remoto</li>
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Horario flexible</li>
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Seguro médico</li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-unstyled text-muted">
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Plan de carrera</li>
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Capacitaciones</li>
-                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Bonos por desempeño</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONTACTO -->
-        <div class="card border-0 shadow-sm rounded-4 p-3">
-          <h6 class="fw-bold mb-2">Contacto</h6>
-          <p class="mb-1 text-muted"><i class="bi bi-envelope me-2"></i>talento@riwi.com</p>
-          <p class="mb-1 text-muted"><i class="bi bi-globe me-2"></i>www.riwi.com</p>
-          <p class="text-muted"><i class="bi bi-linkedin me-2"></i>LinkedIn / RiwiColombia</p>
-        </div>
-
-      </div>
-
-      <!-- FOOTER -->
-      <div class="modal-footer border-0">
-        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Cerrar
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!--  -->
-
-
-        <script src="./js/pages/signout.js" type="module"> </script>
-        <script src="./js/pages/dashboard.js" type="module"> </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"> </script>
-    </body>
+       <script src="./js/pages/dashboard.js" type="module"> </script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+   </body>
 </html>
