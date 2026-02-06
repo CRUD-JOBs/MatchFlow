@@ -1,0 +1,90 @@
+{
+  "candidates": [
+    {
+      "id": "1",
+      "name": "Juan",
+      "email": "juan@gmail.com",
+      "password": "123456",
+      "isOpen": true,
+      "isAvaiable": false,
+      "jobOffer_id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Diego",
+      "email": "diego@gmail.com",
+      "password": "123456",
+      "isOpen": true,
+      "isAvaiable": false,
+      "jobOffer_id": "1"
+    },
+    {
+      "id": "2591",
+      "name": "Santiago",
+      "email": "master@gmail.com",
+      "password": "123456",
+      "isOpen": false,
+      "isAvaiable": false,
+      "jobOffer_id": null
+    },
+    {
+      "id": "27f3",
+      "name": "Anderson Guzman",
+      "email": "and.guz8a@gmail.com",
+      "password": "123456",
+      "isOpen": true,
+      "isAvaiable": false
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "Riwi",
+      "email": "riwi@riwi.io",
+      "password": "123456",
+      "jobOffers": [
+        "1"
+      ],
+      "matches": [
+        "1"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Rappi",
+      "email": "rappi@rappi.io",
+      "password": "123456",
+      "jobOffers": [],
+      "matches": []
+    }
+  ],
+  "jobOffers": [
+    {
+      "id": "1",
+      "company_id": "1",
+      "candidates": [
+        "1",
+        "2"
+      ],
+      "title": "CRUDZASO Developer",
+      "details": "Need developers for CRUDZASO",
+      "state": "on-going"
+    }
+  ],
+  "matches": [
+    {
+      "id": "1",
+      "candidate_id": "1",
+      "company_id": "1",
+      "jobOffer_id": "1",
+      "state": "hired"
+    },
+    {
+      "id": "2",
+      "candidate_id": "2",
+      "company_id": "1",
+      "jobOffer_id": "1",
+      "state": "in-interview"
+    }
+  ]
+}
