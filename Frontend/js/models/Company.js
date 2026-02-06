@@ -125,4 +125,16 @@ export default class Company{
             return []
         }
     }
+
+    async changePlan(newPlan){
+        try{
+            const response = await updateCompany(this.id, { plan: newPlan });
+            this.plan = newPlan;
+            return response;
+        } catch(error){
+            console.error("HTTP Error while trying to update company plan", error);
+            return null;
+        }
+    }
+
 }
