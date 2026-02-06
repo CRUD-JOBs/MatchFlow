@@ -396,6 +396,28 @@ body {
     font-weight: 600 !important;
 }
 
+#profileMessage {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+#profileMessage.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+#profileMessage.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.hidden {
+    display: none;
+}
 /* Responsividad */
 @media (max-width: 768px) {
     .sidebar {
