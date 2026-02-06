@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             availabilityBtn.textContent = "Activar Disponibilidad";
             availabilityBtn.className = "btn btn-primary";
         }
-    };git
+    };
 
     // 4. Inicialización
     loadProfileData();
