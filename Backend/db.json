@@ -7,7 +7,8 @@
       "password": "123456",
       "isOpen": true,
       "isAvaiable": false,
-      "jobOffer_id":"1"
+      "jobOffer_id":"1",
+      "plan": "free"
     },
     {
       "id": "2",
@@ -16,7 +17,8 @@
       "password": "123456",
       "isOpen": true,
       "isAvaiable": false,
-      "jobOffer_id":"1"
+      "jobOffer_id":"1",
+      "plan": "free"
     },
     {
       "id": "2591",
@@ -25,7 +27,8 @@
       "password": "123456",
       "isOpen": false,
       "isAvaiable": false,
-      "jobOffer_id":null
+      "jobOffer_id":null,
+      "plan": "free"
     }
   ],
   "companies": [
@@ -39,7 +42,9 @@
       ],
       "matches": [
         "1"
-      ]
+      ],
+      "plan": "free"
+
     },
     {
       "id": "2",
@@ -47,7 +52,8 @@
       "email": "rappi@rappi.io",
       "password": "123456",
       "jobOffers": [],
-      "matches": []
+      "matches": [],
+      "plan": "free"
     }
   ],
   "jobOffers": [

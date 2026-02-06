@@ -1,7 +1,7 @@
 import {updateCandidate, getCandidate} from "./../api.js"
 export default class Candidate{
     static _candidates = new Map();
-    constructor(id, name, email, password, isOpen, isAvaiable, jobOffer){
+    constructor(id, name, email, password, isOpen, isAvaiable, jobOffer, plan){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -9,10 +9,11 @@ export default class Candidate{
         this.isAvaiable = isAvaiable;
         this.isOpen = isOpen;
         this.jobOffer_id = jobOffer;
+        this.plan = plan || "free";
     }
-    static createCandidate({id = null, name = null, email = null, password = null, isOpen = null, isAvaiable = null, jobOffer = null}){
+    static createCandidate({id = null, name = null, email = null, password = null, isOpen = null, isAvaiable = null, jobOffer = null, plan ="free"}){
         if(!id || !name || !email || !password)return null
-        return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false, jobOffer || null)
+        return new Candidate(id, name, email, password, isOpen || false, isAvaiable || false, jobOffer || null, plan || "free")
     }
     static get candidates(){
         return this._candidates
@@ -77,6 +78,18 @@ export default class Candidate{
             return null
         }
     }
+
+    async changePlan(newPlan){
+        try{
+            const response = await updateCandidate(this.id, { plan: newPlan });
+            this.plan = newPlan;
+            return response;
+        } catch(error){
+            console.error("HTTP Error while trying to update plan", error);
+            return null;
+        }
+    }
+
     resign(){ //This method requires workd, as the user currently is not being removed from the jobOffer
         this.isAvaiable = true; //Sets the property to true
         this.jobOffer = null; //Removes the job offer

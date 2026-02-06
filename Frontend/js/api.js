@@ -309,7 +309,7 @@ export const getMatches = async (...ids) => {
 }
 export const getMatchesByCompany = async (company_id) => {
     try {
-        const response = await fetch(`${API_URL}/matches?company=${company_id}`, {
+        const response = await fetch(`${API_URL}/matches?company_id=${company_id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -321,18 +321,14 @@ export const getMatchesByCompany = async (company_id) => {
     }
 };
 
-export const getMatchByCandidate = async (candidate_id) => {
+export const getMatchesByCandidate = async (candidate_id) => {
     try {
-        const response = await fetch(`${API_URL}/matches?candidate=${candidate_id}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        });
-        if (!response.ok) return null;
-        const data = await response.json();
-        return data.length > 0 ? data[0] : null;
+        const response = await fetch(`${API_URL}/matches?candidate_id=${candidate_id}`);
+        if (!response.ok) throw new Error('Error fetching matches by candidate');
+        return await response.json();
     } catch (error) {
-        console.error('Error in getMatchByCandidate:', error);
-        return null;
+        console.error('Error in getMatchesByCandidate:', error);
+        return [];
     }
 };
 

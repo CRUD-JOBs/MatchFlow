@@ -1,9 +1,12 @@
-import {getCurrentSession, isAuthenticated, getCompany, getCandidates, getJobOffersByCompany, getMatchesByCompany} from '../api.js';
+import {getCurrentSession, isAuthenticated, getCompany, getCandidates, getJobOffersByCompany, getMatchesByCompany, getCandidate, getMatchesByCandidate, createMatch} from '../api.js';
+import { candidatePlanLimits, companyPlanLimits } from '../planRules.js';
 
 // Variables globales
 let currentCompany = null;
 let aspirantesMatch = [];
 let aspirantesNuevos = [];
+let companyJobOffers = [];
+
 
 // INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', async () => {
@@ -49,10 +52,24 @@ async function loadDashboardData() {
     try {
         // Cargar ofertas de trabajo
         const jobOffers = await getJobOffersByCompany(currentCompany.id);
+        companyJobOffers = jobOffers;
         // Cargar matches
         const matches = await getMatchesByCompany(currentCompany.id);
         // Cargar todos los candidatos
         const allCandidates = await getCandidates();
+        const planEmpresa = currentCompany.plan || "free";
+
+        let candidatosVisibles = allCandidates;
+
+        if (planEmpresa !== "enterprise") {
+            const matches = await getMatchesByCompany(currentCompany.id);
+
+            const candidatosReservadosPorOtros = matches.map(m => m.candidate_id);
+
+            candidatosVisibles = allCandidates.filter(c =>
+                !candidatosReservadosPorOtros.includes(c.id)
+            );
+        }
         // Actualizar estadísticas en el dashboard
         updateDashboardStats(jobOffers, allCandidates, matches);
         console.log('Datos del dashboard cargados');
@@ -236,7 +253,7 @@ function verPerfil(id, tipo) {
 }
 
 // Iniciar proceso de contratación
-function iniciarProceso(aspiranteId) {
+async function iniciarProceso(aspiranteId) {
     const aspirante = aspirantesNuevos.find(a => a.id === aspiranteId);
     
     if (!aspirante) {
@@ -244,7 +261,62 @@ function iniciarProceso(aspiranteId) {
         return;
     }
 
+    // Obtener candidato real desde la API
+    const candidatoReal = await getCandidate(aspiranteId);
+
+    // Obtener plan (si no tiene, es free)
+    const plan = candidatoReal.plan || "free";
+
+    // Obtener límite del plan
+    const limite = candidatePlanLimits[plan];
+
+    // Obtener matches actuales del candidato
+    const matchesActuales = await getMatchesByCandidate(aspiranteId);
+    const cantidadMatches = matchesActuales.length;
+
+    const yaReservadoPorEstaEmpresa = matchesActuales.some(
+        m => m.company_id === currentCompany.id
+    );
+
+    if (yaReservadoPorEstaEmpresa) {
+        showError("Ya tienes un proceso activo con este candidato");
+        return;
+    }
+
+    // Validar si ya llegó al límite
+    if (cantidadMatches >= limite) {
+        showError(`Este candidato tiene plan ${plan} y ya alcanzó el máximo de ${limite} reservas`);
+        return;
+    }
+
+    // ===== VALIDACIÓN PLAN EMPRESA =====
+    const planEmpresa = currentCompany.plan || "free";
+    const limiteEmpresa = companyPlanLimits[planEmpresa];
+
+    // matches actuales de la empresa
+    const matchesEmpresa = await getMatchesByCompany(currentCompany.id);
+
+    // contar solo procesos activos (no contratados)
+    const procesosActivos = matchesEmpresa.filter(m => m.state !== "hired");
+
+    if (procesosActivos.length >= limiteEmpresa) {
+        showError(`Tu plan empresa (${planEmpresa}) solo permite ${limiteEmpresa} procesos activos`);
+        return;
+    }
+
+
     if (confirm(`¿Deseas iniciar el proceso de contratación con ${aspirante.nombre}?`)) {
+
+        // Crear match real en el json-server
+        const jobActiva = companyJobOffers.find(j => j.state === "on-going");
+
+        await createMatch({
+            candidate_id: aspiranteId,
+            company_id: currentCompany.id,
+            jobOffer_id: jobActiva ? jobActiva.id : null,
+            state: "in-process"
+        });
+
         // Mover de nuevos a matches
         aspirantesNuevos = aspirantesNuevos.filter(a => a.id !== aspiranteId);
         aspirantesMatch.push(aspirante);
