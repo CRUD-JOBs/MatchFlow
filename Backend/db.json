@@ -23,12 +23,16 @@
       "email": "user@user.com",
       "password": "123",
       "role": "candidate",
-      "isAvailable": true,
-      "skills": [],
-      "experience": "",
-      "processStatus": "pendiente",
-      "assignedCompanyId": null,
-      "reservedBy": null
+      "isAvailable": false,
+      "skills": [
+        "HTML",
+        "JAVASCRIPT"
+      ],
+      "experience": "4 Años en Frontend",
+      "processStatus": "descartado",
+      "assignedCompanyId": "0a6f",
+      "reservedBy": null,
+      "plan": "Pro"
     },
     {
       "id": "aa4b",
@@ -72,7 +76,8 @@
       "email": "com@com.com",
       "password": "123",
       "role": "company",
-      "description": ""
+      "description": "",
+      "plan": "Free"
     }
   ],
   "jobs": [
@@ -98,6 +103,15 @@
       "category": "Tecnología",
       "description": "Tecnología",
       "status": "Activa"
+    },
+    {
+      "id": "3aa2",
+      "companyId": "0a6f",
+      "title": "Inge",
+      "category": "Tecnología",
+      "description": "Ingenierito",
+      "status": "Activa",
+      "createdAt": "2026-02-07T00:46:24.910Z"
     }
   ],
   "applications": [

@@ -1,9 +1,9 @@
 import { getCurrentUser } from '../auth.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const user = getCurrentUser();
+    let user = getCurrentUser();
 
-    // 1. Verificación de Seguridad
+    // 1. Verificación de Seguridad y Rol
     if (!user || user.role !== 'company') {
         window.location.href = 'login.html';
         return;
@@ -11,213 +11,204 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 2. Referencias del DOM
     const companyNameDisplay = document.getElementById('companyNameDisplay');
-    const totalJobsDisplay = document.getElementById('totalJobs');
-    const totalCandidatesDisplay = document.getElementById('totalCandidates');
-    const activeProcessesDisplay = document.getElementById('activeProcesses');
-    const jobsTableBody = document.getElementById('jobsTableBody');
-    const candidatesTableBody = document.getElementById('candidatesTableBody');
+    const companyInfoSubtitle = document.getElementById('companyInfoSubtitle');
+    const currentPlanBadge = document.getElementById('currentPlanBadge');
+    const sections = document.querySelectorAll('.page');
+    const menuLinks = document.querySelectorAll('.menu-link');
     const createJobForm = document.getElementById('createJobForm');
 
-    // 3. Inicialización de Interfaz
-    if (companyNameDisplay) companyNameDisplay.textContent = user.name;
+    // --- INTERFAZ Y NAVBAR ---
+    const updateHeader = () => {
+        if (companyNameDisplay) companyNameDisplay.textContent = user.name;
+        if (companyInfoSubtitle) companyInfoSubtitle.textContent = `Sector: ${user.description || 'Tecnología'}`;
+        
+        if (currentPlanBadge) {
+            const plan = user.plan || 'Free';
+            currentPlanBadge.textContent = plan;
+            currentPlanBadge.className = `badge rounded-pill ms-2 plan-badge text-uppercase ${
+                plan === 'Pro' ? 'bg-primary' : 
+                plan === 'Premium' ? 'bg-warning text-dark' : 'bg-secondary'
+            }`;
+        }
+    };
 
-    /**
-     * Gestión de Navegación del Sidebar (SPA)
-     */
-    const menuLinks = document.querySelectorAll('.menu-link');
-    const sections = document.querySelectorAll('.page');
-
+    // --- NAVEGACIÓN SPA ---
     menuLinks.forEach(link => {
         link.addEventListener('click', () => {
-            const targetPage = link.getAttribute('data-page');
-            
+            const target = link.getAttribute('data-page');
             menuLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-
-            sections.forEach(section => {
-                section.classList.remove('active-page');
-                if (section.id === targetPage) {
-                    section.classList.add('active-page');
-                }
-            });
+            sections.forEach(s => s.classList.toggle('active-page', s.id === target));
         });
     });
 
-    /**
-     * Carga y Procesamiento de Datos
-     */
+    // --- CARGA Y SINCRONIZACIÓN DE DATOS ---
     async function loadAllData() {
         try {
-            const [jobsRes, candRes] = await Promise.all([
+            const [jRes, cRes] = await Promise.all([
                 fetch('http://localhost:3000/jobs'),
                 fetch('http://localhost:3000/candidates')
             ]);
 
-            const allJobs = await jobsRes.json();
-            const allCandidates = await candRes.json();
+            const allJobs = await jRes.json();
+            const allCandidates = await cRes.json();
 
-            // Filtrado de datos por empresa
-            const myJobs = allJobs.filter(j => j.companyId === user.id);
-            const myInProcess = allCandidates.filter(c => c.assignedCompanyId === user.id && c.processStatus !== 'pendiente');
-
-            // Actualización de Métricas en el Dashboard
-            if (totalJobsDisplay) totalJobsDisplay.textContent = myJobs.length;
-            if (totalCandidatesDisplay) totalCandidatesDisplay.textContent = allCandidates.length;
-            if (activeProcessesDisplay) activeProcessesDisplay.textContent = myInProcess.length;
-
+            // Filtrar vacantes propias
+            const myJobs = allJobs.filter(j => String(j.companyId) === String(user.id));
+            
+            // Renderizar tablas
             renderJobsTable(myJobs);
-            renderCandidatesTable(allCandidates, user.id);
+            renderCandidatesTable(allCandidates);
 
-        } catch (error) {
-            console.error("Error técnico al cargar datos:", error);
+            // Actualizar Contadores del Dashboard
+            document.getElementById('totalJobs').textContent = myJobs.length;
+            document.getElementById('totalCandidates').textContent = allCandidates.length;
+            
+            // "En Mi Proceso" cuenta candidatos reservados por esta empresa
+            const myReserved = allCandidates.filter(c => String(c.reservedBy) === String(user.id));
+            document.getElementById('activeProcesses').textContent = myReserved.length;
+
+        } catch (e) {
+            console.error("Error al sincronizar con el servidor:", e);
         }
     }
 
-    /**
-     * Renderizado de Tabla Mis Ofertas
-     */
+    // --- RENDERIZADO DE TABLAS ---
     function renderJobsTable(jobs) {
-        if (!jobsTableBody) return;
-        jobsTableBody.innerHTML = jobs.map(j => `
-            <tr>
-                <td>#${j.id}</td>
-                <td class="fw-bold">${j.title}</td>
-                <td>${j.category || 'N/A'}</td>
-                <td><span class="badge bg-success">Activa</span></td>
-                <td class="text-end">
-                    <button class="btn btn-sm btn-outline-danger" onclick="window.deleteJob('${j.id}')">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        `).join('');
+        const body = document.getElementById('jobsTableBody');
+        if (!body) return;
+        
+        body.innerHTML = jobs.length > 0 
+            ? jobs.map(j => `
+                <tr>
+                    <td>#${j.id}</td>
+                    <td class="fw-bold">${j.title}</td>
+                    <td><span class="badge bg-light text-dark border">${j.category}</span></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-danger" onclick="window.deleteJob('${j.id}')">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>`).join('')
+            : '<tr><td colspan="4" class="text-center py-4 text-muted">No has publicado vacantes aún.</td></tr>';
     }
 
-    /**
-     * Renderizado de Tabla Gestión de Candidatos
-     * Implementa lógica de bloqueo por reserva de terceros
-     */
-    function renderCandidatesTable(candidates, currentCompanyId) {
-        if (!candidatesTableBody) return;
-        candidatesTableBody.innerHTML = candidates.map(c => {
-            // Normalización de estados
-            const reservedBy = c.reservedBy || null;
-            const processStatus = c.processStatus || 'pendiente';
-            const isReservedByOther = reservedBy !== null && reservedBy !== currentCompanyId;
-            const isReservedByMe = reservedBy === currentCompanyId;
+    function renderCandidatesTable(candidates) {
+        const body = document.getElementById('candidatesTableBody');
+        if (!body) return;
 
+        // LÓGICA DE VISIBILIDAD: Ocultar si está reservado por otra empresa
+        const visibleCandidates = candidates.filter(c => 
+            !c.reservedBy || String(c.reservedBy) === String(user.id)
+        );
+
+        body.innerHTML = visibleCandidates.map(c => {
+            const isReservedByMe = String(c.reservedBy) === String(user.id);
+            
             return `
-            <tr class="${isReservedByOther ? 'opacity-50' : ''}">
-                <td>
-                    ${c.name} 
-                    ${isReservedByOther ? '<i class="bi bi-lock-fill text-muted ms-1" title="Reservado por otra empresa"></i>' : ''}
-                </td>
-                <td>${c.experience || 'N/A'}</td>
-                <td>
-                    <span class="badge ${c.isAvailable ? 'bg-info' : 'bg-secondary'}">
-                        ${c.isAvailable ? 'Disponible' : 'No disponible'}
-                    </span>
-                </td>
-                <td>
-                    <select class="form-select form-select-sm" 
-                            ${isReservedByOther ? 'disabled' : ''} 
-                            onchange="window.updateProcess('${c.id}', this.value)">
-                        <option value="pendiente" ${processStatus === 'pendiente' ? 'selected' : ''}>Pendiente</option>
-                        <option value="contactado" ${processStatus === 'contactado' ? 'selected' : ''}>Contactado</option>
-                        <option value="entrevistado" ${processStatus === 'entrevistado' ? 'selected' : ''}>Entrevistado</option>
-                        <option value="contratado" ${processStatus === 'contratado' ? 'selected' : ''}>Contratado</option>
-                        <option value="descartado" ${processStatus === 'descartado' ? 'selected' : ''}>Descartado</option>
-                    </select>
-                </td>
-                <td class="text-end">
-                    <button class="btn btn-sm ${isReservedByMe ? 'btn-warning' : 'btn-outline-warning'}" 
-                            ${isReservedByOther ? 'disabled' : ''} 
-                            onclick="window.toggleReserve('${c.id}', ${isReservedByMe})">
-                        <i class="bi ${isReservedByMe ? 'bi-lock-fill' : 'bi-lock'}"></i>
-                        ${isReservedByMe ? 'Liberar' : (isReservedByOther ? 'Bloqueado' : 'Reservar')}
-                    </button>
-                </td>
-            </tr>
-            `;
+                <tr class="${isReservedByMe ? 'table-info' : ''}">
+                    <td>
+                        <i class="bi bi-person-circle me-2 text-secondary"></i>
+                        <strong>${c.name}</strong>
+                        ${isReservedByMe ? '<span class="badge bg-primary ms-2">Tu Reserva</span>' : ''}
+                    </td>
+                    <td>${c.experience || 'N/A'}</td>
+                    <td>
+                        <span class="badge ${c.isAvailable ? 'bg-success' : 'bg-secondary'}">
+                            ${c.isAvailable ? 'Disponible' : 'En proceso'}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-sm ${isReservedByMe ? 'btn-danger' : 'btn-outline-primary'} fw-bold" 
+                                onclick="window.toggleReserve('${c.id}', ${isReservedByMe})">
+                            <i class="bi ${isReservedByMe ? 'bi-unlock' : 'bi-lock'} me-1"></i>
+                            ${isReservedByMe ? 'Liberar' : 'Reservar'}
+                        </button>
+                    </td>
+                </tr>`;
         }).join('');
     }
 
-    /**
-     * Funciones Globales (Accesibles desde el DOM)
-     */
-    window.toggleReserve = async (candidateId, isCurrentlyReservedByMe) => {
-        const newReservedValue = isCurrentlyReservedByMe ? null : user.id;
-        try {
-            const res = await fetch(`http://localhost:3000/candidates/${candidateId}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ reservedBy: newReservedValue })
-            });
-            if (res.ok) await loadAllData();
-        } catch (e) { console.error("Error al reservar:", e); }
-    };
-
-    window.updateProcess = async (candidateId, newStatus) => {
+    // --- ACCIONES GLOBALES (Window Object) ---
+    window.toggleReserve = async (candidateId, currentlyReservedByMe) => {
+        const reserveValue = currentlyReservedByMe ? null : String(user.id);
+        
         try {
             const res = await fetch(`http://localhost:3000/candidates/${candidateId}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    processStatus: newStatus, 
-                    assignedCompanyId: user.id 
+                    reservedBy: reserveValue,
+                    isAvailable: currentlyReservedByMe // Si libero, vuelve a estar disponible
                 })
             });
-            if (res.ok) await loadAllData();
-        } catch (e) { console.error("Error al actualizar proceso:", e); }
+
+            if (res.ok) {
+                await loadAllData();
+            }
+        } catch (e) {
+            console.error("Error en la operación de reserva:", e);
+        }
     };
 
-    window.deleteJob = async (jobId) => {
-        if (!confirm("¿Está seguro de eliminar esta oferta permanentemente?")) return;
+    window.deleteJob = async (id) => {
+        if (!confirm("¿Eliminar esta oferta permanentemente?")) return;
         try {
-            const res = await fetch(`http://localhost:3000/jobs/${jobId}`, { method: 'DELETE' });
+            const res = await fetch(`http://localhost:3000/jobs/${id}`, { method: 'DELETE' });
             if (res.ok) await loadAllData();
-        } catch (e) { console.error("Error al eliminar vacante:", e); }
+        } catch (e) { console.error(e); }
     };
 
-    /**
-     * Creación de Nueva Oferta
-     */
-    if (createJobForm) {
-        createJobForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const newJob = {
-                companyId: user.id,
-                title: document.getElementById('jobTitleInput').value.trim(),
-                category: document.getElementById('jobCategoryInput').value,
-                description: document.getElementById('jobDescriptionInput').value.trim(),
-                status: "Activa"
-            };
+    window.selectPlan = async (planName) => {
+        if (!confirm(`¿Confirmas el cambio al plan ${planName}?`)) return;
+        try {
+            const res = await fetch(`http://localhost:3000/companies/${user.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ plan: planName })
+            });
+            if (res.ok) {
+                user.plan = planName;
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+                updateHeader();
+                alert(`Plan ${planName} activado.`);
+                document.querySelector('[data-page="dashboard"]').click();
+            }
+        } catch (e) { console.error(e); }
+    };
 
-            try {
-                const res = await fetch('http://localhost:3000/jobs', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newJob)
-                });
+    // --- EVENTOS DE FORMULARIO ---
+    createJobForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newJob = {
+            companyId: user.id,
+            title: document.getElementById('jobTitleInput').value,
+            category: document.getElementById('jobCategoryInput').value,
+            description: document.getElementById('jobDescriptionInput').value,
+            status: "Activa",
+            createdAt: new Date().toISOString()
+        };
 
-                if (res.ok) {
-                    createJobForm.reset();
-                    alert("Oferta publicada con éxito.");
-                    await loadAllData();
-                }
-            } catch (e) { console.error("Error al publicar:", e); }
+        const res = await fetch('http://localhost:3000/jobs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newJob)
         });
-    }
 
-    // Logout
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            sessionStorage.removeItem('currentUser');
-            window.location.href = 'login.html';
-        });
-    }
+        if (res.ok) {
+            alert("Oferta publicada.");
+            createJobForm.reset();
+            await loadAllData();
+        }
+    });
 
-    // Ejecución inicial
+    // --- LOGOUT ---
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        sessionStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+    });
+
+    // Inicialización
+    updateHeader();
     loadAllData();
 });
